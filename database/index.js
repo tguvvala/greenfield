@@ -4,7 +4,8 @@ const mysql = require('mysql');
 // need to connect to user 'root', no password, and to db 'choreApp'
 let dbConnection = mysql.createConnection({
   user: 'root',
-  database: 'choreApp'
+  database: 'choreApp',
+  stringifyObjects: true,
 });
 
 dbConnection.connect();
