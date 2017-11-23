@@ -54,7 +54,6 @@ app.get('/test', (req, res) => {
   res.send('Get request success!');
 });
 
-
 modelDB.updateChores();
 
 // get request to /chores route

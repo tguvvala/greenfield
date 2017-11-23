@@ -7,7 +7,6 @@ const moment = require('moment');
 // response to client in the JSON data format {todayChores:[ ], futureChores: [ ] }
 
 const getChores = (req, res) => {
-  console.log('im getchores');
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM chores WHERE next_date >= CURRENT_DATE()', (err, result) => {
       if (err) {
@@ -34,7 +33,6 @@ const getChores = (req, res) => {
         }
         obj = {};
       }
-      res.json(data);
       console.log('data', data);
       return resolve(result);
     });
@@ -97,7 +95,6 @@ const updateChores = (req, res) => {
         });
      }
      });
-    
   });
 };
 
