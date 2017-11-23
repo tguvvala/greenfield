@@ -32,7 +32,7 @@ app.use(express.static(__dirname + './../'));
 //////// Routes //////////
 app.get('/', (req, res) => res.send('Server Message!'));
 
-app.post('/signup', passport.autheticate('local-signup', {
+app.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/login',
   failureRedirect: '/signup',
   failureFlash: true
@@ -54,13 +54,33 @@ app.get('/test', (req, res) => {
   res.send('Get request success!');
 });
 
+
+modelDB.updateChores();
+
 // get request to /chores route
 app.get('/chores', (req, res) => {
+	console.log('im in server get');
+	//console.log('request body', req.body);
   modelDB.getChores(req, res);
 });
 
+// {
+//           id: 1,
+//           chore_name: 'Wash dishes',
+//           next_date: '2017-11-19 09:00:00',
+//           frequency: 'daily',
+//           last_date_completed: '2017-11-18 09:00:00',
+//           completed: true,
+//         },
+
+// { chore_name: 'watch the dog',
+//   next_date: '2017-11-22 12:00:00',
+//   frequency: 'daily' }
+
 // post request to /chores route
-app.post('/chores', (req, res) => {
+app.post('/chores', (req, res, req1) => {
+	console.log('im in server post');
+	console.log('request body', req.body);
   modelDB.postChores(req, res, req.body);
 });
 
