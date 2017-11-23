@@ -1,6 +1,6 @@
 import React from 'react';
 // import Axios for all client files making requests
-// import axios from 'axios';
+import axios from 'axios';
 
 import TodaysChores from './TodaysChores.jsx';
 import FutureChores from './FutureChores.jsx';
@@ -67,15 +67,21 @@ class App extends React.Component {
     // this.testGetReq = this.testGetReq.bind(this);
   }
 
-  // testGetReq() {
-  //   axios.get('/test')
-  //     .then(function(response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function(err) {
-  //       console.log(err);
-  //     })
-  // }
+  componentDidMount() {
+    let app = this;
+    axios.get('/chores')
+      .then(function(response) {
+        console.log(response);
+        app.setState({
+          todaysChores: response.data.todayChores,
+          futureChores: response.data.futureChores,
+        });
+        
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  }
 
   render() {
     console.log('rendering');

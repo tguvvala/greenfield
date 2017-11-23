@@ -3,14 +3,14 @@ import Datetime from 'react-datetime';
 import axios from 'axios';
 import moment from 'moment';
 
-class AddChore extends React.component {
+class AddChore extends React.Component {
   // future implementation should have a "custom" frequency picker as well
   constructor(props) {
     super(props);
     this.state = {
       chore_name: '',
       next_date: '',
-      frequency: '',
+      frequency: 'daily',
     };
   }
 
@@ -22,11 +22,13 @@ class AddChore extends React.component {
       [event.target.id]: event.target.value,
     });
   }
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault();
     axios.post('/chores', {
       chore_name: this.state.chore_name,
       next_date: this.state.next_date,
       frequency: this.state.frequency,
+      user_id: 1,
     })
       .then((response) => {
         console.log('posted a chore to server!');
@@ -40,7 +42,7 @@ class AddChore extends React.component {
   render() {
     return (
       <div className="row add-chore">
-        <form id="add-chore-form" onSubmit={this.handleSubmit}>
+        <form id="add-chore-form" onSubmit={e => this.handleSubmit(e)}>
           Chore:
           <input id="chore_name" type="text" onChange={e => this.handleChange(e)} />
           Date:
