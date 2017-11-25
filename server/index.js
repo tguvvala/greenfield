@@ -55,32 +55,15 @@ app.get('/test', (req, res) => {
 });
 
 
-modelDB.updateChores();
+//modelDB.updateChores();
 
 // get request to /chores route
 app.get('/chores', (req, res) => {
-	console.log('im in server get');
-	//console.log('request body', req.body);
   modelDB.getChores(req, res);
 });
 
-// {
-//           id: 1,
-//           chore_name: 'Wash dishes',
-//           next_date: '2017-11-19 09:00:00',
-//           frequency: 'daily',
-//           last_date_completed: '2017-11-18 09:00:00',
-//           completed: true,
-//         },
-
-// { chore_name: 'watch the dog',
-//   next_date: '2017-11-22 12:00:00',
-//   frequency: 'daily' }
-
 // post request to /chores route
-app.post('/chores', (req, res, req1) => {
-	console.log('im in server post');
-	console.log('request body', req.body);
+app.post('/chores', (req, res) => {
   modelDB.postChores(req, res, req.body);
 });
 
